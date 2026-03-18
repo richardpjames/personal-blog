@@ -1,3 +1,5 @@
+import Moment from "moment";
+
 import type blogPost from "../../../server/src/types/blogPost";
 
 interface PostListProps {
@@ -5,16 +7,35 @@ interface PostListProps {
 }
 
 export default function PostList({ posts }: PostListProps) {
+  posts?.forEach((post) => {
+    post.content = post.content.replaceAll("<h2", '<h2 class="text-2xl py-2"');
+    post.content = post.content.replaceAll("<p", '<p class="py-2"');
+    post.content = post.content.replaceAll(
+      "<ul",
+      '<ul class="list-disc list-inside"',
+    );
+    post.content = post.content.replaceAll(
+      "<ol",
+      '<ol class="list-decimal list-inside"',
+    );
+    post.content = post.content.replaceAll("<li", '<li class="py-1"');
+  });
+
   return (
     <>
-      <div className="mx-auto max-w-5xl">
+      <ul className="divide-y divide-gray-200 dark:divide-gray-700">
         {posts?.map((post) => (
-          <div key={post.id}>
-            <h2 className="font-bold text-2xl underline py-2">{post.title}</h2>
-            <p>{post.content}</p>
-          </div>
+          <li key={post.id} className="py-12">
+            <h2 className="font-bold text-2xl">
+              {post.title}{" "}
+              <span className="text-gray-600">
+                {Moment(post.date).format("DD-MM-YYYY")}
+              </span>
+            </h2>
+            <p dangerouslySetInnerHTML={{ __html: post.content }}></p>
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 }

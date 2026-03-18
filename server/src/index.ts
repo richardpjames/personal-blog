@@ -1,26 +1,10 @@
 import express from "express";
 import path from "path";
 
-import type blogPost from "./types/blogPost";
+import posts from "./data/posts";
 
 const app = express();
 const port = process.env.PORT ?? "8000";
-
-const posts: blogPost[] = [
-  {
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    date: new Date(),
-    id: 1,
-    title: "My first blog post",
-  },
-  {
-    content:
-      "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: new Date(),
-    id: 2,
-    title: "My second blog post",
-  },
-];
 
 app.get("/api/posts", (req, res) => {
   res.json(posts);
