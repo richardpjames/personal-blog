@@ -1,4 +1,5 @@
 import Moment from "moment";
+import FormatPost from "../libraries/FormatPost";
 
 import type blogPost from "../../../server/src/types/blogPost";
 
@@ -8,17 +9,7 @@ interface PostListProps {
 
 export default function PostList({ posts }: PostListProps) {
   posts?.forEach((post) => {
-    post.content = post.content.replaceAll("<h2", '<h2 class="text-2xl py-2"');
-    post.content = post.content.replaceAll("<p", '<p class="py-2"');
-    post.content = post.content.replaceAll(
-      "<ul",
-      '<ul class="list-disc list-inside"',
-    );
-    post.content = post.content.replaceAll(
-      "<ol",
-      '<ol class="list-decimal list-inside"',
-    );
-    post.content = post.content.replaceAll("<li", '<li class="py-1"');
+    post.content = FormatPost(post.content);
   });
 
   return (

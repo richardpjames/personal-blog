@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 
 import type blogPost from "../../server/src/types/blogPost";
 import PostList from "./components/PostList";
+import Footer from "./components/Footer";
 
 function App() {
   const [posts, setPosts] = useState<blogPost[]>();
@@ -30,6 +31,7 @@ function App() {
         </div>
         <PostList posts={posts} />
       </section>
+      <Footer />
     </div>
   );
 }
