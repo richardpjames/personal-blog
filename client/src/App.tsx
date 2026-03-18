@@ -1,28 +1,25 @@
 import { useState, useEffect } from "react";
 
-import type messageResponse from "../../server/src/types/messageResponse";
+import NavBar from "./components/NavBar";
+
+import type blogPost from "../../server/src/types/blogPost";
+import PostList from "./components/PostList";
 
 function App() {
-  const [message, setMessage] = useState<null | messageResponse>();
+  const [posts, setPosts] = useState<blogPost[]>();
 
   useEffect(() => {
-    fetch("/api/hello")
+    fetch("/api/posts")
       .then((response) => response.json())
       .then((data) => {
-        setMessage(data);
+        setPosts(data);
       });
   }, []);
 
   return (
     <>
-      <main className="h-screen bg-gray-100 py-5 px-5">
-        <div className="bg-white py-10 shadow shadow-gray-700 rounded-2xl">
-          <p className="text-5xl text-center pb-2 font-bold">
-            {message?.Header}
-          </p>
-          <p className="text-xl text-center">{message?.Message}</p>
-        </div>
-      </main>
+      <NavBar />
+      <PostList posts={posts} />
     </>
   );
 }

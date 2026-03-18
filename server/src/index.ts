@@ -1,19 +1,29 @@
 import express from "express";
 import path from "path";
 
-import messageResponse from "./types/messageResponse";
+import type blogPost from "./types/blogPost";
 
 const app = express();
 const port = process.env.PORT ?? "8000";
 
-app.get("/api/hello", (req, res) => {
-  const message: messageResponse = {
-    Header: "Richard James",
-    Message:
-      "Welcome to my personal website. This is a blog containing my random notes and musings on subjects including technology, music and cookery!",
-  };
+app.get("/api/posts", (req, res) => {
+  const posts: blogPost[] = [
+    {
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      date: new Date(),
+      id: 1,
+      title: "My first blog post",
+    },
+    {
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      date: new Date(),
+      id: 2,
+      title: "My second blog post",
+    },
+  ];
 
-  res.json(message);
+  res.json(posts);
 });
 
 // Use express to serve our built React application, meaning only a single app server is required
