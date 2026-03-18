@@ -5,7 +5,11 @@ const app = express();
 const port = process.env.PORT ?? "8000";
 
 app.get("/api/hello", (req, res) => {
-  res.json({ Text: "Welcome to my personal website!" });
+  res.json({
+    Heading: "Richard James",
+    Content:
+      "Welcome to my personal website. This is a blog containing my random notes and musings on subjects including technology, music and cookery!",
+  });
   console.log("Response sent");
 });
 
