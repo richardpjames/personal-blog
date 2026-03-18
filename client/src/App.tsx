@@ -19,6 +19,9 @@ function App() {
   return (
     <>
       <NavBar />
+      <div>
+        <img src="/public/heading.png" className="mx-auto max-w-5xl" />
+      </div>
       <PostList posts={posts} />
     </>
   );
