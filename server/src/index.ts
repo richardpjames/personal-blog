@@ -1,16 +1,19 @@
 import express from "express";
 import path from "path";
 
+import messageResponse from "./types/messageResponse";
+
 const app = express();
 const port = process.env.PORT ?? "8000";
 
 app.get("/api/hello", (req, res) => {
-  res.json({
-    Heading: "Richard James",
-    Content:
+  const message: messageResponse = {
+    Header: "Richard James",
+    Message:
       "Welcome to my personal website. This is a blog containing my random notes and musings on subjects including technology, music and cookery!",
-  });
-  console.log("Response sent");
+  };
+
+  res.json(message);
 });
 
 // Use express to serve our built React application, meaning only a single app server is required

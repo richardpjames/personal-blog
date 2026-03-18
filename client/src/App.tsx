@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 
-class messageResponse {
-  "Heading": string;
-  "Content": string;
-}
+import type messageResponse from "../../server/src/types/messageResponse";
 
 function App() {
   const [message, setMessage] = useState<null | messageResponse>();
@@ -18,8 +15,14 @@ function App() {
 
   return (
     <>
-      <p className="text-5xl text-center">{message?.Heading}</p>
-      <p className="text-xl text-center">{message?.Content}</p>
+      <main className="h-screen bg-gray-100 py-5 px-5">
+        <div className="bg-white py-10 shadow shadow-gray-700 rounded-2xl">
+          <p className="text-5xl text-center pb-2 font-bold">
+            {message?.Header}
+          </p>
+          <p className="text-xl text-center">{message?.Message}</p>
+        </div>
+      </main>
     </>
   );
 }
