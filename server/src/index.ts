@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import "dotenv/config";
 
 import posts from "./data/posts";
 
