@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 
 import NavBar from "./components/NavBar";
 
-import type blogPost from "../../server/src/types/blogPost";
 import PostList from "./components/PostList";
 import Footer from "./components/Footer";
 
 function App() {
-  const [posts, setPosts] = useState<blogPost[]>();
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     fetch("/api/posts")

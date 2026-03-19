@@ -1,4 +1,4 @@
-export default function FormatPost(post: string): string {
+export default function FormatPost(post) {
   let formattedPost = post.replaceAll("<h2", '<h2 class="text-2xl py-2"');
   formattedPost = formattedPost.replaceAll("<p", '<p class="py-2"');
   formattedPost = formattedPost.replaceAll(

@@ -1,13 +1,7 @@
 import Moment from "moment";
 import FormatPost from "../libraries/FormatPost";
 
-import type blogPost from "../../../server/src/types/blogPost";
-
-interface PostListProps {
-  posts?: blogPost[];
-}
-
-export default function PostList({ posts }: PostListProps) {
+export default function PostList({ posts }) {
   posts?.forEach((post) => {
     post.content = FormatPost(post.content);
   });
