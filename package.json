@@ -13,7 +13,7 @@
     "typescript-eslint": "^8.57.1"
   },
   "scripts": {
-    "build": "npm run build --workspace=personal-blog-client && npm run build --workspace=personal-blog-server",
+    "build": "npm run build --workspace=personal-blog-client",
     "start": "npm start --workspace=personal-blog-server",
     "upgrade": "pm2 stop personal-blog && git pull && npm install && npm run build && cd server && db-migrate up && pm2 start personal-blog"
   }

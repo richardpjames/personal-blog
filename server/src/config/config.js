@@ -1,6 +1,4 @@
-import configuration from "../types/configuration";
-
-const config: configuration = {
+module.exports = {
   application: {
     port: process.env.PORT ?? 8000,
   },
@@ -18,5 +16,3 @@ const config: configuration = {
     sessionSecret: process.env.SESSION_SECRET ?? "supersecret",
   },
 };
-
-export default config;
