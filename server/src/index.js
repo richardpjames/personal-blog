@@ -22,7 +22,6 @@ app.get("/api/posts", (req, res) => {
   postgres
     .pool()
     .query("SELECT * FROM posts ORDER BY date DESC", (err, data) => {
-      console.log(data.rows);
       // Map the database rows to the blogPost type and store them in the posts array
       res.json(data.rows);
     });
