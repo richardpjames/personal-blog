@@ -21,11 +21,13 @@ app.get("/api/posts", (req, res) => {
   // Start with an empty array of blog posts
   let posts: blogPost[] = [];
   // Get all of the posts
-  postgres.pool().query("SELECT * FROM posts", (err, data) => {
-    // Map the database rows to the blogPost type and store them in the posts array
-    posts = data.rows as blogPost[];
-    res.json(posts);
-  });
+  postgres
+    .pool()
+    .query("SELECT * FROM posts ORDER BY date DESC", (err, data) => {
+      // Map the database rows to the blogPost type and store them in the posts array
+      posts = data.rows as blogPost[];
+      res.json(posts);
+    });
 });
 
 // Use express to serve our built React application, meaning only a single app server is required
