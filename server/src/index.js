@@ -3,6 +3,9 @@ const express = require("express");
 const helmet = require("helmet");
 const path = require("path");
 require("dotenv/config");
+// For managing users and sessions
+const session = require("express-session");
+const PgSession = require("connect-pg-simple")(session);
 
 // Internal requires
 const config = require("./config/config");
@@ -12,6 +15,25 @@ const postgres = require("./db/postgres");
 postgres.connectToServer();
 // Then create the web server
 const app = express();
+// Session storage
+app.use(
+  session({
+    store: new PgSession({
+      pool: postgres.pool(),
+    }),
+    secret: config.sessions.sessionSecret,
+    name: "richardpjames_session",
+    resave: false,
+    saveUninitialized: true,
+    proxy: true,
+    cookie: {
+      domain: config.sessions.cookieDomain,
+      path: "/",
+      secure: config.sessions.cookieSecure === "true",
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    },
+  }),
+);
 // Helmet is a collection of middleware functions that set various HTTP headers to help protect the app from some well-known web vulnerabilities to improve security.
 app.use(helmet());
 // Set the port to the value in the environment variable PORT
