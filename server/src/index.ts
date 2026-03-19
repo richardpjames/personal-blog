@@ -1,14 +1,31 @@
 import express from "express";
+import helmet from "helmet";
 import path from "path";
 import "dotenv/config";
 
-import posts from "./data/posts";
+import config from "./config/config";
+import postgres from "./db/postgres";
+import blogPost from "./types/blogPost";
+
+// Connect to the PostgreSQL database
+postgres.connectToServer();
 
 const app = express();
-const port = process.env.PORT ?? "8000";
+// Helmet is a collection of middleware functions that set various HTTP headers to help protect the app from some well-known web vulnerabilities to improve security.
+app.use(helmet());
+// Set the port to the value in the environment variable PORT, or default to 8000 if it is not set
+const port = config.application.port;
 
+// Get the list of posts
 app.get("/api/posts", (req, res) => {
-  res.json(posts);
+  // Start with an empty array of blog posts
+  let posts: blogPost[] = [];
+  // Get all of the posts
+  postgres.pool().query("SELECT * FROM posts", (err, data) => {
+    // Map the database rows to the blogPost type and store them in the posts array
+    posts = data.rows as blogPost[];
+    res.json(posts);
+  });
 });
 
 // Use express to serve our built React application, meaning only a single app server is required
@@ -19,5 +36,6 @@ app.get("/", (req, res) => {
 
 // Start the server and listen on the requested port
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  console.log(`App listening on port ${config.application.port}`);
 });
