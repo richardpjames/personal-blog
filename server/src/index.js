@@ -41,9 +41,9 @@ app.use(
 // Helmet is a collection of middleware functions that set various HTTP headers to help protect the app from some well-known web vulnerabilities to improve security.
 app.use(helmet());
 // Use express to serve our built React application, meaning only a single app server is required
-app.use(express.static(path.join(__dirname, "../../../client/dist")));
+app.use(express.static(path.join(__dirname, "../../client/dist")));
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../../client/dist/index.html"));
+  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
 });
 // Set the port to the value in the environment variable PORT
 const port = config.application.port;
