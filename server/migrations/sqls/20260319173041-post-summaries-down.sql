@@ -1,0 +1,1 @@
+UPDATE posts SET summary = 'TBC';

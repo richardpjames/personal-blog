@@ -1,0 +1,1 @@
+UPDATE posts SET summary = SUBSTRING(content, 1, 200) WHERE summary IS NULL OR summary = 'TBC';
