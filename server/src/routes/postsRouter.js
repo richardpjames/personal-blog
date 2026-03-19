@@ -6,5 +6,6 @@ const postsController = require("../controllers/postsController");
 const postsRouter = express.Router({ mergeParams: true });
 // Routes
 postsRouter.get("/", postsController.getAll);
+postsRouter.get("/:slug", postsController.get);
 // Export the router so that it can be used in the routes.js file
 module.exports = postsRouter;

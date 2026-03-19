@@ -8,4 +8,11 @@ module.exports = {
     const response = await pool.query("SELECT * FROM posts ORDER BY date DESC");
     res.json(response.rows);
   },
+  get: async (req, res) => {
+    const { slug } = req.params;
+    const response = await pool.query("SELECT * FROM posts WHERE slug = $1", [
+      slug,
+    ]);
+    res.json(response.rows[0]);
+  },
 };
