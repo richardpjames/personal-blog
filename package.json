@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "npm run build --workspace=personal-blog-client && npm run build --workspace=personal-blog-server",
-    "start": "npm start --workspace=personal-blog-server"
+    "start": "npm start --workspace=personal-blog-server",
+    "upgrade": "git pull && npm install && npm run build && pm2 restart personal-blog"
   }
 }
