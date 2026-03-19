@@ -6,7 +6,6 @@ const pool = postgres.pool();
 module.exports = {
   getAll: async (req, res) => {
     const response = await pool.query("SELECT * FROM posts ORDER BY date DESC");
-    console.log(response);
     res.json(response.rows);
   },
 };
